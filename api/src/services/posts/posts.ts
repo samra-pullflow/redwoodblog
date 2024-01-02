@@ -5,7 +5,7 @@ import { db } from 'src/lib/db'
 export const posts: QueryResolvers['posts'] = () => {
   return db.post.findMany()
 }
-
+// postgresql://postgres:simplepw@localhost:5432/posts_db
 export const post: QueryResolvers['post'] = ({ id }) => {
   return db.post.findUnique({
     where: { id },

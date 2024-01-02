@@ -7,6 +7,9 @@
  *
  * See https://redwoodjs.com/docs/authentication for more info.
  */
+
+//  api/src/lib/post_manager -> db calls to create/update/delete/get post
+
 export const isAuthenticated = () => {
   return true
 }

@@ -1,3 +1,12 @@
+import {
+  Card,
+  CardBody,
+  Text,
+  Heading,
+  Stack,
+  StackDivider,
+  Box,
+} from '@chakra-ui/react'
 import type { ArticlesQuery } from 'types/graphql'
 
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
@@ -6,6 +15,9 @@ export const QUERY = gql`
   query ArticlesQuery {
     articles: posts {
       id
+      title
+      body
+      createdAt
     }
   }
 `
@@ -19,11 +31,18 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ articles }: CellSuccessProps<ArticlesQuery>) => {
-  return (
-    <ul>
-      {articles.map((item) => {
-        return <li key={item.id}>{JSON.stringify(item)}</li>
-      })}
-    </ul>
-  )
+  return articles.map((article) => (
+    <Box key={article.id}>
+      <Card>
+        <CardBody>
+          <Stack divider={<StackDivider />}>
+            <Heading size="md">Title: {article.title}</Heading>
+            <Text>Description: {article.body}</Text>
+            <Text>Created At: {article.createdAt}</Text>
+          </Stack>
+        </CardBody>
+        {/* <CardFooter>{article.createdAt}</CardFooter> */}
+      </Card>
+    </Box>
+  ))
 }
