@@ -32,7 +32,6 @@ export const Success = ({
 }: CellSuccessProps<FindArticleQuery, FindArticleQueryVariables>) => {
   return (
     <>
-      <Heading>{article.id}</Heading>
       <Article key={article.id} article={article}></Article>
     </>
   )
