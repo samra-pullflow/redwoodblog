@@ -1,15 +1,8 @@
-import {
-  Card,
-  CardBody,
-  Text,
-  Heading,
-  Stack,
-  StackDivider,
-  Box,
-} from '@chakra-ui/react'
 import type { ArticlesQuery } from 'types/graphql'
 
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
+
+import Article from '../Article/Article'
 
 export const QUERY = gql`
   query ArticlesQuery {
@@ -32,17 +25,6 @@ export const Failure = ({ error }: CellFailureProps) => (
 
 export const Success = ({ articles }: CellSuccessProps<ArticlesQuery>) => {
   return articles.map((article) => (
-    <Box key={article.id}>
-      <Card>
-        <CardBody>
-          <Stack divider={<StackDivider />}>
-            <Heading size="md">Title: {article.title}</Heading>
-            <Text>Description: {article.body}</Text>
-            <Text>Created At: {article.createdAt}</Text>
-          </Stack>
-        </CardBody>
-        {/* <CardFooter>{article.createdAt}</CardFooter> */}
-      </Card>
-    </Box>
+    <Article key={article.id} article={article}></Article>
   ))
 }

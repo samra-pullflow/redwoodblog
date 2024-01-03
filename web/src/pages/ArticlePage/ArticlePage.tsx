@@ -1,16 +1,9 @@
-import { Link, routes } from '@redwoodjs/router'
+import ArticleCell from 'src/components/ArticleCell'
 
-const ArticlePage = () => {
+const ArticlePage = ({ id }) => {
   return (
     <>
-      <h1>ArticlePage</h1>
-      <p>
-        Find me in <code>./web/src/pages/ArticlePage/ArticlePage.tsx</code>
-      </p>
-      <p>
-        My default route is named <code>article</code>, link to me with `
-        <Link to={routes.article()}>Article</Link>`
-      </p>
+      <ArticleCell id={id} />
     </>
   )
 }
