@@ -7,6 +7,7 @@
  *
  * See https://redwoodjs.com/docs/authentication for more info.
  */
+
 export const isAuthenticated = () => {
   return true
 }

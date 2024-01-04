@@ -1,7 +1,13 @@
 import type { Post } from '@prisma/client'
+import {
+  posts,
+  post,
+  createPost,
+  updatePost,
+  deletePost,
+} from 'api/src/lib/post_manager'
 
-import { posts, post, createPost, updatePost, deletePost } from './posts'
-import type { StandardScenario } from './posts.scenarios'
+import type { StandardScenario } from '../services/posts/posts.scenarios'
 
 // Generated boilerplate tests do not account for all circumstances
 // and can fail without adjustments, e.g. Float.
