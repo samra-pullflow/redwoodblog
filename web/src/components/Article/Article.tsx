@@ -11,7 +11,7 @@ import {
 import { Link, routes } from '@redwoodjs/router'
 const Article = ({ article }) => {
   return (
-    <Box key={article.id} bg="gray.100" p={4} borderRadius="md" mb={4}>
+    <Box key={article.id} bg="purple.100" p={4} borderRadius="md" mb={4}>
       <Card>
         <CardBody>
           <Stack divider={<StackDivider />}>

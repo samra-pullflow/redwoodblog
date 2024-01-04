@@ -8,25 +8,28 @@ import PostForm from 'src/components/Post/PostForm'
 
 const CREATE_POST_MUTATION = gql`
   mutation CreatePostMutation($input: CreatePostInput!) {
-    createPost(input: $input) {
+    createService(input: $input) {
       id
     }
   }
 `
 
 const NewPost = () => {
-  const [createPost, { loading, error }] = useMutation(CREATE_POST_MUTATION, {
-    onCompleted: () => {
-      toast.success('Post created')
-      navigate(routes.posts())
-    },
-    onError: (error) => {
-      toast.error(error.message)
-    },
-  })
+  const [createService, { loading, error }] = useMutation(
+    CREATE_POST_MUTATION,
+    {
+      onCompleted: () => {
+        toast.success('Post created')
+        navigate(routes.posts())
+      },
+      onError: (error) => {
+        toast.error(error.message)
+      },
+    }
+  )
 
   const onSave = (input: CreatePostInput) => {
-    createPost({ variables: { input } })
+    createService({ variables: { input } })
   }
 
   return (

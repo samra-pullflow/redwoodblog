@@ -7,7 +7,7 @@ import Posts from 'src/components/Post/Posts'
 
 export const QUERY = gql`
   query FindPosts {
-    posts {
+    postsService {
       id
       title
       body
@@ -29,10 +29,15 @@ export const Empty = () => {
   )
 }
 
-export const Failure = ({ error }: CellFailureProps) => (
-  <div className="rw-cell-error">{error?.message}</div>
-)
+export const Failure = ({ error }: CellFailureProps) => {
+  {
+    console.log('failure')
+  }
+  return <div className="rw-cell-error">{error?.message}</div>
+}
 
-export const Success = ({ posts }: CellSuccessProps<FindPosts>) => {
-  return <Posts posts={posts} />
+export const Success = ({ postsService }: CellSuccessProps<FindPosts>) => {
+  console.log('posts', postsService)
+  // return <Posts posts={posts} />
+  return <Posts posts={postsService} />
 }

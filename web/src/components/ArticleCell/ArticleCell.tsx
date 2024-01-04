@@ -1,14 +1,12 @@
-import { Heading } from '@chakra-ui/react'
 import type { FindArticleQuery, FindArticleQueryVariables } from 'types/graphql'
 
-// import { Link, routes } from '@redwoodjs/router'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 
 import Article from '../Article/Article'
 
 export const QUERY = gql`
   query FindArticleQuery($id: Int!) {
-    article: post(id: $id) {
+    article: postService(id: $id) {
       id
       title
       body

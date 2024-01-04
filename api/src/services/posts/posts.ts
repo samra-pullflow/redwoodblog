@@ -1,32 +1,58 @@
-import type { QueryResolvers, MutationResolvers } from 'types/graphql'
+// import { Post } from 'api/src/lib/post_manager'
+// import type { QueryResolvers, MutationResolvers } from 'types/graphql'
+// import { db } from 'src/lib/db'
+import { calcLength } from 'framer-motion'
 
-import { db } from 'src/lib/db'
+import { Post } from 'src/lib/post_manager'
 
-export const posts: QueryResolvers['posts'] = () => {
-  return db.post.findMany()
-}
-// postgresql://postgres:simplepw@localhost:5432/posts_db
-export const post: QueryResolvers['post'] = ({ id }) => {
-  return db.post.findUnique({
-    where: { id },
-  })
+export const createService = async ({ input }) => {
+  return await Post.createPost({ input })
 }
 
-export const createPost: MutationResolvers['createPost'] = ({ input }) => {
-  return db.post.create({
-    data: input,
-  })
+export const updateService = async ({ id, input }) => {
+  return await Post.updatePost({ id, input })
 }
 
-export const updatePost: MutationResolvers['updatePost'] = ({ id, input }) => {
-  return db.post.update({
-    data: input,
-    where: { id },
-  })
+export const deleteService = async ({ id }) => {
+  return await Post.deletePost({ id })
 }
 
-export const deletePost: MutationResolvers['deletePost'] = ({ id }) => {
-  return db.post.delete({
-    where: { id },
-  })
+export const postsService = async () => {
+  console.log('data retreived from service')
+  const posts = await Post.posts()
+  console.log('posts from service', posts)
+  return posts
 }
+
+export const postService = async ({ id }) => {
+  return await Post.post({ id })
+}
+
+// export const posts: QueryResolvers['posts'] = () => {
+//   return db.post.findMany()
+// }
+
+// export const post: QueryResolvers['post'] = ({ id }) => {
+//   return db.post.findUnique({
+//     where: { id },
+//   })
+// }
+
+// export const createPost: MutationResolvers['createPost'] = ({ input }) => {
+//   return db.post.create({
+//     data: input,
+//   })
+// }
+
+// export const updatePost: MutationResolvers['updatePost'] = ({ id, input }) => {
+//   return db.post.update({
+//     data: input,
+//     where: { id },
+//   })
+// }
+
+// export const deletePost: MutationResolvers['deletePost'] = ({ id }) => {
+//   return db.post.delete({
+//     where: { id },
+//   })
+// }

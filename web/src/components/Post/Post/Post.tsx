@@ -1,25 +1,24 @@
+import type { DeletePostMutationVariables, FindPostById } from 'types/graphql'
+
 import { Link, routes, navigate } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import { timeTag } from 'src/lib/formatters'
 
-import type { DeletePostMutationVariables, FindPostById } from 'types/graphql'
-
 const DELETE_POST_MUTATION = gql`
   mutation DeletePostMutation($id: Int!) {
-    deletePost(id: $id) {
+    deleteService(id: $id) {
       id
     }
   }
 `
-
 interface Props {
   post: NonNullable<FindPostById['post']>
 }
 
 const Post = ({ post }: Props) => {
-  const [deletePost] = useMutation(DELETE_POST_MUTATION, {
+  const [deleteService] = useMutation(DELETE_POST_MUTATION, {
     onCompleted: () => {
       toast.success('Post deleted')
       navigate(routes.posts())
@@ -31,7 +30,7 @@ const Post = ({ post }: Props) => {
 
   const onDeleteClick = (id: DeletePostMutationVariables['id']) => {
     if (confirm('Are you sure you want to delete post ' + id + '?')) {
-      deletePost({ variables: { id } })
+      deleteService({ variables: { id } })
     }
   }
 

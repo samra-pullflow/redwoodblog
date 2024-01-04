@@ -7,8 +7,8 @@ export const schema = gql`
   }
 
   type Query {
-    posts: [Post!]! @skipAuth
-    post(id: Int!): Post @skipAuth
+    postsService: [Post!]! @skipAuth
+    postService(id: Int!): Post @skipAuth
   }
 
   input CreatePostInput {
@@ -22,8 +22,8 @@ export const schema = gql`
   }
 
   type Mutation {
-    createPost(input: CreatePostInput!): Post! @requireAuth
-    updatePost(id: Int!, input: UpdatePostInput!): Post! @requireAuth
-    deletePost(id: Int!): Post! @requireAuth
+    createService(input: CreatePostInput!): Post! @requireAuth
+    updateService(id: Int!, input: UpdatePostInput!): Post! @requireAuth
+    deleteService(id: Int!): Post! @requireAuth
   }
 `

@@ -6,7 +6,7 @@ import Post from 'src/components/Post/Post'
 
 export const QUERY = gql`
   query FindPostById($id: Int!) {
-    post: post(id: $id) {
+    postService(id: $id) {
       id
       title
       body
@@ -23,6 +23,6 @@ export const Failure = ({ error }: CellFailureProps) => (
   <div className="rw-cell-error">{error?.message}</div>
 )
 
-export const Success = ({ post }: CellSuccessProps<FindPostById>) => {
-  return <Post post={post} />
+export const Success = ({ postService }: CellSuccessProps<FindPostById>) => {
+  return <Post post={postService} />
 }
