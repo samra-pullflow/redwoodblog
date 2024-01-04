@@ -1,3 +1,4 @@
+import { Box } from '@chakra-ui/react'
 import type { FindPosts } from 'types/graphql'
 
 import { Link, routes } from '@redwoodjs/router'
@@ -16,16 +17,16 @@ export const QUERY = gql`
   }
 `
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => <Box>Loading...</Box>
 
 export const Empty = () => {
   return (
-    <div className="rw-text-center">
+    <Box className="rw-text-center">
       {'No posts yet. '}
       <Link to={routes.newPost()} className="rw-link">
         {'Create one?'}
       </Link>
-    </div>
+    </Box>
   )
 }
 
@@ -33,11 +34,10 @@ export const Failure = ({ error }: CellFailureProps) => {
   {
     console.log('failure')
   }
-  return <div className="rw-cell-error">{error?.message}</div>
+  return <Box className="rw-cell-error">{error?.message}</Box>
 }
 
 export const Success = ({ postsService }: CellSuccessProps<FindPosts>) => {
   console.log('posts', postsService)
-  // return <Posts posts={posts} />
   return <Posts posts={postsService} />
 }

@@ -1,3 +1,4 @@
+import { Box } from '@chakra-ui/react'
 import type { FindArticleQuery, FindArticleQueryVariables } from 'types/graphql'
 
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
@@ -15,14 +16,14 @@ export const QUERY = gql`
   }
 `
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => <Box>Loading...</Box>
 
-export const Empty = () => <div>Empty</div>
+export const Empty = () => <Box>Empty</Box>
 
 export const Failure = ({
   error,
 }: CellFailureProps<FindArticleQueryVariables>) => (
-  <div style={{ color: 'red' }}>Error: {error?.message}</div>
+  <Box color="red">Error: {error?.message}</Box>
 )
 
 export const Success = ({

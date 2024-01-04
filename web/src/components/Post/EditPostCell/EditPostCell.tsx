@@ -1,3 +1,4 @@
+import { Box, Heading } from '@chakra-ui/react'
 import type { EditPostById, UpdatePostInput } from 'types/graphql'
 
 import { navigate, routes } from '@redwoodjs/router'
@@ -28,10 +29,10 @@ const UPDATE_POST_MUTATION = gql`
   }
 `
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => <Box>Loading...</Box>
 
 export const Failure = ({ error }: CellFailureProps) => (
-  <div className="rw-cell-error">{error?.message}</div>
+  <Box className="rw-cell-error">{error?.message}</Box>
 )
 
 export const Success = ({ postService }: CellSuccessProps<EditPostById>) => {
@@ -53,20 +54,20 @@ export const Success = ({ postService }: CellSuccessProps<EditPostById>) => {
   }
 
   return (
-    <div className="rw-segment">
-      <header className="rw-segment-header">
-        <h2 className="rw-heading rw-heading-secondary">
+    <Box className="rw-segment">
+      <Box as="header" className="rw-segment-header">
+        <Heading as="h2" className="rw-heading rw-heading-secondary">
           Edit Post {postService?.id}
-        </h2>
-      </header>
-      <div className="rw-segment-main">
+        </Heading>
+      </Box>
+      <Box className="rw-segment-main">
         <PostForm
           post={postService}
           onSave={onSave}
           error={error}
           loading={loading}
         />
-      </div>
-    </div>
+      </Box>
+    </Box>
   )
 }

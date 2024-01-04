@@ -1,3 +1,4 @@
+import { Box, Heading } from '@chakra-ui/react'
 import type { CreatePostInput } from 'types/graphql'
 
 import { navigate, routes } from '@redwoodjs/router'
@@ -33,14 +34,16 @@ const NewPost = () => {
   }
 
   return (
-    <div className="rw-segment">
-      <header className="rw-segment-header">
-        <h2 className="rw-heading rw-heading-secondary">New Post</h2>
-      </header>
-      <div className="rw-segment-main">
+    <Box className="rw-segment">
+      <Box as="header" className="rw-segment-header">
+        <Heading as="h2" className="rw-heading rw-heading-secondary">
+          New Post
+        </Heading>
+      </Box>
+      <Box className="rw-segment-main">
         <PostForm onSave={onSave} loading={loading} error={error} />
-      </div>
-    </div>
+      </Box>
+    </Box>
   )
 }
 

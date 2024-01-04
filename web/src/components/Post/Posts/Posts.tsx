@@ -1,3 +1,4 @@
+import { Box, Table, Thead, Tr, Th, Button, Td, Tbody } from '@chakra-ui/react'
 import type { DeletePostMutationVariables, FindPosts } from 'types/graphql'
 
 import { Link, routes } from '@redwoodjs/router'
@@ -37,26 +38,26 @@ const PostsList = ({ posts }: FindPosts) => {
   }
 
   return (
-    <div className="rw-segment rw-table-wrapper-responsive">
-      <table className="rw-table">
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Title</th>
-            <th>Body</th>
-            <th>Created at</th>
-            <th>&nbsp;</th>
-          </tr>
-        </thead>
-        <tbody>
+    <Box className="rw-segment rw-table-wrapper-responsive">
+      <Table className="rw-table">
+        <Thead>
+          <Tr>
+            <Th>Id</Th>
+            <Th>Title</Th>
+            <Th>Body</Th>
+            <Th>Created at</Th>
+            <Th>&nbsp;</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
           {posts.map((post) => (
-            <tr key={post.id}>
-              <td>{truncate(post.id)}</td>
-              <td>{truncate(post.title)}</td>
-              <td>{truncate(post.body)}</td>
-              <td>{timeTag(post.createdAt)}</td>
-              <td>
-                <nav className="rw-table-actions">
+            <Tr key={post.id}>
+              <Td>{truncate(post.id)}</Td>
+              <Td>{truncate(post.title)}</Td>
+              <Td>{truncate(post.body)}</Td>
+              <Td>{timeTag(post.createdAt)}</Td>
+              <Td>
+                <Box className="rw-table-actions">
                   <Link
                     to={routes.post({ id: post.id })}
                     title={'Show post ' + post.id + ' detail'}
@@ -71,21 +72,21 @@ const PostsList = ({ posts }: FindPosts) => {
                   >
                     Edit
                   </Link>
-                  <button
+                  <Button
                     type="button"
                     title={'Delete post ' + post.id}
                     className="rw-button rw-button-small rw-button-red"
                     onClick={() => onDeleteClick(post.id)}
                   >
                     Delete
-                  </button>
-                </nav>
-              </td>
-            </tr>
+                  </Button>
+                </Box>
+              </Td>
+            </Tr>
           ))}
-        </tbody>
-      </table>
-    </div>
+        </Tbody>
+      </Table>
+    </Box>
   )
 }
 

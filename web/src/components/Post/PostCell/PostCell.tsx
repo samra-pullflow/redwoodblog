@@ -1,3 +1,4 @@
+import { Box } from '@chakra-ui/react'
 import type { FindPostById } from 'types/graphql'
 
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
@@ -15,12 +16,12 @@ export const QUERY = gql`
   }
 `
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => <Box>Loading...</Box>
 
-export const Empty = () => <div>Post not found</div>
+export const Empty = () => <Box>Post not found</Box>
 
 export const Failure = ({ error }: CellFailureProps) => (
-  <div className="rw-cell-error">{error?.message}</div>
+  <Box className="rw-cell-error">{error?.message}</Box>
 )
 
 export const Success = ({ postService }: CellSuccessProps<FindPostById>) => {
