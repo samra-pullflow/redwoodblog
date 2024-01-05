@@ -3,12 +3,13 @@ export const schema = gql`
     id: Int!
     title: String!
     body: String!
-    createdAt: DateTime!
+    createdAt: DateTime
   }
 
   type Query {
     postsService: [Post!]! @skipAuth
     postService(id: Int!): Post @skipAuth
+    generatePost(topic: String!): String @skipAuth
   }
 
   input CreatePostInput {

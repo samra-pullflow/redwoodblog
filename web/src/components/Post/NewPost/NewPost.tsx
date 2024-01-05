@@ -15,7 +15,7 @@ const CREATE_POST_MUTATION = gql`
   }
 `
 
-const NewPost = () => {
+export const NewPost = () => {
   const [createService, { loading, error }] = useMutation(
     CREATE_POST_MUTATION,
     {
