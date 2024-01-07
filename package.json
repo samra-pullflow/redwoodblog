@@ -7,6 +7,7 @@
     ]
   },
   "devDependencies": {
+    "@redwoodjs/auth-dbauth-setup": "6.6.0",
     "@redwoodjs/core": "6.6.0"
   },
   "eslintConfig": {
@@ -25,6 +26,11 @@
     "@chakra-ui/react": "^2.8.2",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
-    "framer-motion": "^10.16.16"
+    "axios": "^1.6.4",
+    "cors": "^2.8.5",
+    "framer-motion": "^10.16.16",
+    "moment": "^2.30.1",
+    "openai": "^4.0.0",
+    "usellm": "^0.13.0"
   }
 }

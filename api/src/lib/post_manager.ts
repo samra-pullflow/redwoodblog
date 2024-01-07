@@ -1,31 +1,26 @@
-import { db } from 'api/src/lib/db'
-import type { QueryResolvers, MutationResolvers } from 'types/graphql'
+import { db } from 'src/lib/db'
 
-export const posts: QueryResolvers['posts'] = () => {
-  return db.post.findMany()
-}
-// postgresql://postgres:simplepw@localhost:5432/posts_db
-export const post: QueryResolvers['post'] = ({ id }) => {
-  return db.post.findUnique({
-    where: { id },
-  })
-}
+export const Post = {
+  posts: async () => {
+    console.log('data retreived from manager')
+    return await db.post.findMany()
+  },
 
-export const createPost: MutationResolvers['createPost'] = ({ input }) => {
-  return db.post.create({
-    data: input,
-  })
-}
+  post: async ({ id }) => {
+    return await db.post.findUnique({
+      where: { id },
+    })
+  },
 
-export const updatePost: MutationResolvers['updatePost'] = ({ id, input }) => {
-  return db.post.update({
-    data: input,
-    where: { id },
-  })
-}
+  createPost: async ({ input }) => {
+    return await db.post.create({ data: input })
+  },
 
-export const deletePost: MutationResolvers['deletePost'] = ({ id }) => {
-  return db.post.delete({
-    where: { id },
-  })
+  updatePost: async ({ id, input }) => {
+    return await db.post.update({ where: { id }, data: input })
+  },
+
+  deletePost: async ({ id }) => {
+    return await db.post.delete({ where: { id } })
+  },
 }

@@ -1,25 +1,35 @@
+import {
+  Box,
+  Heading,
+  Table,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  Button,
+  ButtonGroup,
+} from '@chakra-ui/react'
+import type { DeletePostMutationVariables, FindPostById } from 'types/graphql'
+
 import { Link, routes, navigate } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import { timeTag } from 'src/lib/formatters'
 
-import type { DeletePostMutationVariables, FindPostById } from 'types/graphql'
-
 const DELETE_POST_MUTATION = gql`
   mutation DeletePostMutation($id: Int!) {
-    deletePost(id: $id) {
+    deleteService(id: $id) {
       id
     }
   }
 `
-
 interface Props {
   post: NonNullable<FindPostById['post']>
 }
 
 const Post = ({ post }: Props) => {
-  const [deletePost] = useMutation(DELETE_POST_MUTATION, {
+  const [deleteService] = useMutation(DELETE_POST_MUTATION, {
     onCompleted: () => {
       toast.success('Post deleted')
       navigate(routes.posts())
@@ -31,54 +41,51 @@ const Post = ({ post }: Props) => {
 
   const onDeleteClick = (id: DeletePostMutationVariables['id']) => {
     if (confirm('Are you sure you want to delete post ' + id + '?')) {
-      deletePost({ variables: { id } })
+      deleteService({ variables: { id } })
     }
   }
 
   return (
     <>
-      <div className="rw-segment">
-        <header className="rw-segment-header">
-          <h2 className="rw-heading rw-heading-secondary">
+      <Box className="rw-segment">
+        <Box as="header" className="rw-segment-header">
+          <Heading className="rw-heading rw-heading-secondary">
             Post {post.id} Detail
-          </h2>
-        </header>
-        <table className="rw-table">
-          <tbody>
-            <tr>
-              <th>Id</th>
-              <td>{post.id}</td>
-            </tr>
-            <tr>
-              <th>Title</th>
-              <td>{post.title}</td>
-            </tr>
-            <tr>
-              <th>Body</th>
-              <td>{post.body}</td>
-            </tr>
-            <tr>
-              <th>Created at</th>
-              <td>{timeTag(post.createdAt)}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <nav className="rw-button-group">
-        <Link
-          to={routes.editPost({ id: post.id })}
-          className="rw-button rw-button-blue"
-        >
-          Edit
-        </Link>
-        <button
+          </Heading>
+        </Box>
+        <Table className="rw-table">
+          <Tbody>
+            <Tr>
+              <Th>Id</Th>
+              <Td>{post.id}</Td>
+            </Tr>
+            <Tr>
+              <Th>Title</Th>
+              <Td>{post.title}</Td>
+            </Tr>
+            <Tr>
+              <Th>Body</Th>
+              <Td>{post.body}</Td>
+            </Tr>
+            <Tr>
+              <Th>Created at</Th>
+              <Td>{timeTag(post.createdAt)}</Td>
+            </Tr>
+          </Tbody>
+        </Table>
+      </Box>
+      <ButtonGroup className="rw-button-group">
+        <Button type="button" className="rw-button rw-button-blue">
+          <Link to={routes.editPost({ id: post.id })}>Edit</Link>
+        </Button>
+        <Button
           type="button"
           className="rw-button rw-button-red"
           onClick={() => onDeleteClick(post.id)}
         >
           Delete
-        </button>
-      </nav>
+        </Button>
+      </ButtonGroup>
     </>
   )
 }

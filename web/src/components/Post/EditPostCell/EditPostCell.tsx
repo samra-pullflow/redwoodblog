@@ -1,3 +1,4 @@
+import { Box, Heading } from '@chakra-ui/react'
 import type { EditPostById, UpdatePostInput } from 'types/graphql'
 
 import { navigate, routes } from '@redwoodjs/router'
@@ -9,7 +10,7 @@ import PostForm from 'src/components/Post/PostForm'
 
 export const QUERY = gql`
   query EditPostById($id: Int!) {
-    post: post(id: $id) {
+    postService(id: $id) {
       id
       title
       body
@@ -19,7 +20,7 @@ export const QUERY = gql`
 `
 const UPDATE_POST_MUTATION = gql`
   mutation UpdatePostMutation($id: Int!, $input: UpdatePostInput!) {
-    updatePost(id: $id, input: $input) {
+    updateService(id: $id, input: $input) {
       id
       title
       body
@@ -28,37 +29,45 @@ const UPDATE_POST_MUTATION = gql`
   }
 `
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => <Box>Loading...</Box>
 
 export const Failure = ({ error }: CellFailureProps) => (
-  <div className="rw-cell-error">{error?.message}</div>
+  <Box className="rw-cell-error">{error?.message}</Box>
 )
 
-export const Success = ({ post }: CellSuccessProps<EditPostById>) => {
-  const [updatePost, { loading, error }] = useMutation(UPDATE_POST_MUTATION, {
-    onCompleted: () => {
-      toast.success('Post updated')
-      navigate(routes.posts())
-    },
-    onError: (error) => {
-      toast.error(error.message)
-    },
-  })
+export const Success = ({ postService }: CellSuccessProps<EditPostById>) => {
+  const [updateService, { loading, error }] = useMutation(
+    UPDATE_POST_MUTATION,
+    {
+      onCompleted: () => {
+        toast.success('Post updated')
+        navigate(routes.posts())
+      },
+      onError: (error) => {
+        toast.error(error.message)
+      },
+    }
+  )
 
   const onSave = (input: UpdatePostInput, id: EditPostById['post']['id']) => {
-    updatePost({ variables: { id, input } })
+    updateService({ variables: { id, input } })
   }
 
   return (
-    <div className="rw-segment">
-      <header className="rw-segment-header">
-        <h2 className="rw-heading rw-heading-secondary">
-          Edit Post {post?.id}
-        </h2>
-      </header>
-      <div className="rw-segment-main">
-        <PostForm post={post} onSave={onSave} error={error} loading={loading} />
-      </div>
-    </div>
+    <Box className="rw-segment">
+      <Box as="header" className="rw-segment-header">
+        <Heading as="h2" className="rw-heading rw-heading-secondary">
+          Edit Post {postService?.id}
+        </Heading>
+      </Box>
+      <Box className="rw-segment-main">
+        <PostForm
+          post={postService}
+          onSave={onSave}
+          error={error}
+          loading={loading}
+        />
+      </Box>
+    </Box>
   )
 }

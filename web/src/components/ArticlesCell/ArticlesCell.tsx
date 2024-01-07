@@ -1,3 +1,4 @@
+import { Box } from '@chakra-ui/react'
 import type { ArticlesQuery } from 'types/graphql'
 
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
@@ -6,7 +7,7 @@ import Article from '../Article/Article'
 
 export const QUERY = gql`
   query ArticlesQuery {
-    articles: posts {
+    articles: postsService {
       id
       title
       body
@@ -15,12 +16,13 @@ export const QUERY = gql`
   }
 `
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => <Box>Loading...</Box>
 
-export const Empty = () => <div>Empty</div>
+export const Empty = () => <Box>Empty</Box>
 
 export const Failure = ({ error }: CellFailureProps) => (
-  <div style={{ color: 'red' }}>Error: {error?.message}</div>
+  console.log('cant fetch data'),
+  (<Box color="red">Error: {error?.message}</Box>)
 )
 
 export const Success = ({ articles }: CellSuccessProps<ArticlesQuery>) => {

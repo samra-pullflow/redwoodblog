@@ -1,3 +1,4 @@
+import { Box, Heading } from '@chakra-ui/react'
 import type { CreatePostInput } from 'types/graphql'
 
 import { navigate, routes } from '@redwoodjs/router'
@@ -8,36 +9,41 @@ import PostForm from 'src/components/Post/PostForm'
 
 const CREATE_POST_MUTATION = gql`
   mutation CreatePostMutation($input: CreatePostInput!) {
-    createPost(input: $input) {
+    createService(input: $input) {
       id
     }
   }
 `
 
-const NewPost = () => {
-  const [createPost, { loading, error }] = useMutation(CREATE_POST_MUTATION, {
-    onCompleted: () => {
-      toast.success('Post created')
-      navigate(routes.posts())
-    },
-    onError: (error) => {
-      toast.error(error.message)
-    },
-  })
+export const NewPost = () => {
+  const [createService, { loading, error }] = useMutation(
+    CREATE_POST_MUTATION,
+    {
+      onCompleted: () => {
+        toast.success('Post created')
+        navigate(routes.posts())
+      },
+      onError: (error) => {
+        toast.error(error.message)
+      },
+    }
+  )
 
   const onSave = (input: CreatePostInput) => {
-    createPost({ variables: { input } })
+    createService({ variables: { input } })
   }
 
   return (
-    <div className="rw-segment">
-      <header className="rw-segment-header">
-        <h2 className="rw-heading rw-heading-secondary">New Post</h2>
-      </header>
-      <div className="rw-segment-main">
+    <Box className="rw-segment">
+      <Box as="header" className="rw-segment-header">
+        <Heading as="h2" className="rw-heading rw-heading-secondary">
+          New Post
+        </Heading>
+      </Box>
+      <Box className="rw-segment-main">
         <PostForm onSave={onSave} loading={loading} error={error} />
-      </div>
-    </div>
+      </Box>
+    </Box>
   )
 }
 
