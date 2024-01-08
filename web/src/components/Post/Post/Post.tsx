@@ -47,40 +47,48 @@ const Post = ({ post }: Props) => {
 
   return (
     <>
-      <Box className="rw-segment">
-        <Box as="header" className="rw-segment-header">
-          <Heading className="rw-heading rw-heading-secondary">
-            Post {post.id} Detail
+      <Box>
+        <Box as="header">
+          <Heading as="h2" fontSize="l" mt="4" color="gray.700">
+            Post {post.id} Details
           </Heading>
         </Box>
-        <Table className="rw-table">
+        <Table variant="striped" colorScheme="purple" mt="4">
           <Tbody>
             <Tr>
-              <Th>Id</Th>
+              <Th fontSize="sm" fontWeight="bold" color="gray.700">
+                Id
+              </Th>
               <Td>{post.id}</Td>
             </Tr>
             <Tr>
-              <Th>Title</Th>
+              <Th fontSize="sm" fontWeight="bold" color="gray.700">
+                Title
+              </Th>
               <Td>{post.title}</Td>
             </Tr>
             <Tr>
-              <Th>Body</Th>
+              <Th fontSize="sm" fontWeight="bold" color="gray.700">
+                Body
+              </Th>
               <Td>{post.body}</Td>
             </Tr>
             <Tr>
-              <Th>Created at</Th>
+              <Th fontSize="sm" fontWeight="bold" color="gray.700">
+                Created at
+              </Th>
               <Td>{timeTag(post.createdAt)}</Td>
             </Tr>
           </Tbody>
         </Table>
       </Box>
-      <ButtonGroup className="rw-button-group">
-        <Button type="button" className="rw-button rw-button-blue">
+      <ButtonGroup mt="4">
+        <Button colorScheme="blue" size="sm">
           <Link to={routes.editPost({ id: post.id })}>Edit</Link>
         </Button>
         <Button
-          type="button"
-          className="rw-button rw-button-red"
+          colorScheme="red"
+          size="sm"
           onClick={() => onDeleteClick(post.id)}
         >
           Delete
