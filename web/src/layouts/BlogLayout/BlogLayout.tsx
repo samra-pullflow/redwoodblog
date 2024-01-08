@@ -21,7 +21,7 @@ const BlogLayout = ({ children }: BlogLayoutProps) => {
             {isAuthenticated ? (
               <Flex align="center">
                 <Text fontSize="sm" mr={2}>
-                  Logged in as {currentUser.email}
+                  {/* Logged in as {currentUser.email} */}
                 </Text>
                 <Button size="sm" onClick={logOut}>
                   Logout
@@ -33,7 +33,7 @@ const BlogLayout = ({ children }: BlogLayoutProps) => {
           </Box>
           <Stack direction="row" spacing={4}>
             <Flex as="ul" listStyleType="none" ml={4} fontSize="sm">
-              <li>
+              {/* <li>
                 <Link to={routes.home()}>Home </Link>
               </li>
               <li>
@@ -41,7 +41,7 @@ const BlogLayout = ({ children }: BlogLayoutProps) => {
               </li>
               <li>
                 <Link to={routes.contact()}>Contact </Link>
-              </li>
+              </li> */}
             </Flex>
           </Stack>
         </Flex>

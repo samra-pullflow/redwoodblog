@@ -32,7 +32,7 @@ const ScaffoldLayout = ({
             </Heading>
             <Flex align="center">
               <Text fontSize="sm" mr={2}>
-                Logged in as {currentUser.email}
+                {/* Logged in as {currentUser.email} */}
               </Text>
               <Button size="sm" onClick={logOut}>
                 Logout
