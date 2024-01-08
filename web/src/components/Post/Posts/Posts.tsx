@@ -101,7 +101,6 @@ const PostsList = ({ posts }: FindPosts) => {
           ))}
         </Tbody>
       </Table>
-
       <Box>
         <Flex justify="center" mt={4}>
           <Stack direction="row" spacing={4}></Stack>

@@ -50,7 +50,7 @@ const Post = ({ post }: Props) => {
       <Box>
         <Box as="header">
           <Heading as="h2" fontSize="l" mt="4" color="gray.700">
-            Post {post.id}
+            Post {post.id} Details
           </Heading>
         </Box>
         <Table variant="striped" colorScheme="purple" mt="4">

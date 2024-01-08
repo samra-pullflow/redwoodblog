@@ -54,13 +54,11 @@ export const Success = ({ postService }: CellSuccessProps<EditPostById>) => {
   }
 
   return (
-    <Box className="rw-segment">
-      <Box as="header" className="rw-segment-header">
-        <Heading as="h2" className="rw-heading rw-heading-secondary">
-          Edit Post {postService?.id}
-        </Heading>
-      </Box>
-      <Box className="rw-segment-main">
+    <Box>
+      <Heading as="h2" fontSize="md" mb={4} textAlign="center">
+        Edit Post {postService?.id}
+      </Heading>
+      <Box>
         <PostForm
           post={postService}
           onSave={onSave}
