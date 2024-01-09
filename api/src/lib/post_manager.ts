@@ -4,7 +4,6 @@ export const Post = {
   posts: async () => {
     console.log('data retreived from manager')
     return await db.post.findMany({
-      // where: { userId: context.currentUser.id },
       include: {
         user: true,
       },

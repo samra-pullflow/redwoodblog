@@ -1,4 +1,15 @@
-import { Box, Flex, Heading, Button, Text } from '@chakra-ui/react'
+import { AddIcon, ExternalLinkIcon, RepeatIcon } from '@chakra-ui/icons'
+import {
+  Box,
+  Flex,
+  Heading,
+  Menu,
+  MenuButton,
+  MenuItem,
+  IconButton,
+  MenuList,
+} from '@chakra-ui/react'
+import { FaRegUserCircle } from 'react-icons/fa'
 
 import { Link, routes } from '@redwoodjs/router'
 import { Toaster } from '@redwoodjs/web/toast'
@@ -12,14 +23,8 @@ type LayoutProps = {
   children: React.ReactNode
 }
 
-const ScaffoldLayout = ({
-  title,
-  titleTo,
-  buttonLabel,
-  buttonTo,
-  children,
-}: LayoutProps) => {
-  const { isAuthenticated, currentUser, logOut } = useAuth()
+const ScaffoldLayout = ({ children }: LayoutProps) => {
+  const { logOut } = useAuth()
 
   return (
     <Box className="rw-scaffold">
@@ -30,29 +35,36 @@ const ScaffoldLayout = ({
             <Heading as="h1" fontSize="xl">
               <Link to={routes.home()}>Redwood Blog</Link>
             </Heading>
-            <Flex align="center">
-              <Text fontSize="sm" mr={2}>
-                {/* Logged in as {currentUser.email} */}
-              </Text>
-              <Button size="sm" onClick={logOut}>
-                Logout
-              </Button>
-            </Flex>
           </Box>
           <Flex gap={2}>
-            <Link to={routes.generatePost()}>
-              <Button colorScheme="green">Generate Post Through AI</Button>
-            </Link>
-            <Link to={routes[buttonTo]()}>
-              <Button colorScheme="green"> {buttonLabel} +</Button>
-            </Link>
+            <Menu>
+              <MenuButton
+                as={IconButton}
+                aria-label="Options"
+                icon={<FaRegUserCircle />}
+                variant="outline"
+              />
+              <MenuList>
+                <Link to={routes.generatePost()}>
+                  <MenuItem icon={<AddIcon />} color="green">
+                    Generate Post
+                  </MenuItem>
+                </Link>
+                <Link to={routes.newPost()}>
+                  <MenuItem icon={<ExternalLinkIcon />} color="green">
+                    New Post
+                  </MenuItem>
+                </Link>
+                <MenuItem onClick={logOut} icon={<RepeatIcon />} color="green">
+                  Logout
+                </MenuItem>
+              </MenuList>
+            </Menu>
           </Flex>
         </Flex>
       </Box>
-      {/* <main className="rw-main">{children}</main> */}
       <Box
         as="main"
-        className="rw-main"
         p={4}
         bg="gray.100"
         minH="100vh"

@@ -14,6 +14,7 @@ export const QUERY = gql`
       createdAt
       user {
         name
+        email
       }
     }
   }
@@ -30,6 +31,6 @@ export const Failure = ({ error }: CellFailureProps) => (
 
 export const Success = ({ articles }: CellSuccessProps<ArticlesQuery>) => {
   return articles.map((article) => (
-    <Article key={article.id} article={article}></Article>
+    <Article key={article.id} article={article} doTruncate={true}></Article>
   ))
 }

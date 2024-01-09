@@ -1,7 +1,6 @@
 import { Heading } from '@chakra-ui/react'
 import type { FindArticleQuery, FindArticleQueryVariables } from 'types/graphql'
 
-// import { Link, routes } from '@redwoodjs/router'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 
 import Article from '../Article/Article'
@@ -35,8 +34,8 @@ export const Success = ({
 }: CellSuccessProps<FindArticleQuery, FindArticleQueryVariables>) => {
   return (
     <>
-      <Heading>{article.id}</Heading>
-      <Article key={article.id} article={article}></Article>
+      <Heading>{article.title}</Heading>
+      <Article article={article} doTruncate={false}></Article>
     </>
   )
 }
