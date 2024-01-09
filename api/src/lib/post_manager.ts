@@ -38,5 +38,3 @@ export const Post = {
     db.post.findFirst({ where: { id: postId } }).user()
   },
 }
-
-// user: (_obj, { root }) =>

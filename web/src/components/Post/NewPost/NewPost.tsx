@@ -34,13 +34,11 @@ export const NewPost = () => {
   }
 
   return (
-    <Box className="rw-segment">
-      <Box as="header" className="rw-segment-header">
-        <Heading as="h2" className="rw-heading rw-heading-secondary">
-          New Post
-        </Heading>
+    <Box>
+      <Box>
+        <Heading as="h2">New Post</Heading>
       </Box>
-      <Box className="rw-segment-main">
+      <Box>
         <PostForm onSave={onSave} loading={loading} error={error} />
       </Box>
     </Box>
