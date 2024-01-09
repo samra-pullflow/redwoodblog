@@ -24,6 +24,10 @@ export const postService = async ({ id }) => {
   return await Post.post({ id })
 }
 
+export const getUserService = async ({ id }) => {
+  Post.user({ postId: id })
+}
+
 export const generatePost = async ({ topic }) => {
   const completion = await openai.chat.completions.create({
     messages: [

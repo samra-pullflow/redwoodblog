@@ -25,6 +25,7 @@ const Article = ({ article }) => {
               <Link to={routes.article({ id: article.id })}>
                 Title: {article.title}
               </Link>
+              <Text>by {article.user.name}</Text>
             </Heading>
             <Text>Description: {truncate(article.body)}</Text>
             <Text>Created At: {formattedDate}</Text>
