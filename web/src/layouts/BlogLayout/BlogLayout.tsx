@@ -45,7 +45,11 @@ const BlogLayout = ({ children }: BlogLayoutProps) => {
                       Generate Post
                     </MenuItem>
                   </Link>
-
+                  <Link to={routes.posts()}>
+                    <MenuItem icon={<ExternalLinkIcon />} color="green">
+                      Posts
+                    </MenuItem>
+                  </Link>
                   <Link to={routes.newPost()}>
                     <MenuItem icon={<ExternalLinkIcon />} color="green">
                       New Post

@@ -27,7 +27,7 @@ const ScaffoldLayout = ({ children }: LayoutProps) => {
   const { logOut } = useAuth()
 
   return (
-    <Box className="rw-scaffold">
+    <Box>
       <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
       <Box as="header" p={4} bg="purple.500" color="white">
         <Flex align="center" justify="space-between">
@@ -48,6 +48,11 @@ const ScaffoldLayout = ({ children }: LayoutProps) => {
                 <Link to={routes.generatePost()}>
                   <MenuItem icon={<AddIcon />} color="green">
                     Generate Post
+                  </MenuItem>
+                </Link>
+                <Link to={routes.posts()}>
+                  <MenuItem icon={<ExternalLinkIcon />} color="green">
+                    Posts
                   </MenuItem>
                 </Link>
                 <Link to={routes.newPost()}>

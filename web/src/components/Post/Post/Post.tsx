@@ -86,13 +86,13 @@ const Post = ({ post }: Props) => {
         <Button colorScheme="blue" size="sm">
           <Link to={routes.editPost({ id: post.id })}>Edit</Link>
         </Button>
-        <Button
+        {/* <Button
           colorScheme="red"
           size="sm"
           onClick={() => onDeleteClick(post.id)}
         >
           Delete
-        </Button>
+        </Button> */}
       </ButtonGroup>
     </>
   )

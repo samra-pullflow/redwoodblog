@@ -1,10 +1,10 @@
 import { useState } from 'react'
 
+import { useLazyQuery } from '@apollo/client'
 import { Box, Button, Input, Textarea } from '@chakra-ui/react'
 import type { CreatePostInput } from 'types/graphql'
 
 import { routes, navigate } from '@redwoodjs/router'
-import { useQuery } from '@redwoodjs/web'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
@@ -24,14 +24,20 @@ const CREATE_POST_MUTATION = gql`
 const GeneratePostPage = () => {
   const [inputText, setInputText] = useState('')
   const [generatedText, setGeneratedText] = useState('')
-  const { loading, data } = useQuery(QUERY, {
-    variables: { topic: inputText },
+
+  const [fetchData, { loading, data }] = useLazyQuery(QUERY, {
+    onCompleted: (resultData) => {
+      if (resultData.generatePost) {
+        setGeneratedText(resultData.generatePost)
+      }
+    },
   })
 
   const handleGenerateText = async () => {
     try {
-      console.log('Data ', data)
-      if (data && data.generatePost) setGeneratedText(data.generatePost)
+      await fetchData({ variables: { topic: inputText } })
+      console.log('Data ', data.generatePost)
+      if (data.generatePost) setGeneratedText(data.generatePost)
     } catch (error) {
       console.error('Error generating post:', error)
     }

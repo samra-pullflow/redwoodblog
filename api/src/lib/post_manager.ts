@@ -12,14 +12,14 @@ export const Post = {
 
   post: async ({ id }) => {
     return await db.post.findUnique({
-      where: { id, userId: context.currentUser.id },
+      where: { id },
       include: {
         user: true,
       },
     })
   },
 
-  createPost: async ({ input }) => {
+  createPost: async ({ input }: { input: { title: string; body: string } }) => {
     return await db.post.create({
       data: { ...input, userId: context.currentUser.id },
     })

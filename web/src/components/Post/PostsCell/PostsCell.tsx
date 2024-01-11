@@ -34,7 +34,7 @@ export const Failure = ({ error }: CellFailureProps) => {
   {
     console.log('failure')
   }
-  return <Box className="rw-cell-error">{error?.message}</Box>
+  return <Box>{error?.message}</Box>
 }
 
 export const Success = ({ postsService }: CellSuccessProps<FindPosts>) => {

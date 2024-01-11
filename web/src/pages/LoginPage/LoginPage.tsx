@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { useEffect } from 'react'
 
-import { Box, Heading, LinkBox } from '@chakra-ui/react'
+import { Box, Heading } from '@chakra-ui/react'
 
 import {
   Form,
@@ -50,9 +50,11 @@ const LoginPage = () => {
       <Box>
         <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
         <Box>
-          <header className="rw-segment-header">
-            <Heading as="h2">Login</Heading>
-          </header>
+          <Box backgroundColor="purple.100" padding="4">
+            <Heading marginTop="3" marginLeft="3" size="md" textAlign="center">
+              Login
+            </Heading>
+          </Box>
 
           <Box marginLeft="2">
             <Box marginLeft="2">
@@ -98,7 +100,6 @@ const LoginPage = () => {
                     },
                   }}
                 />
-
                 <Box>
                   <Link to={routes.forgotPassword()} className="rw-forgot-link">
                     Forgot Password?

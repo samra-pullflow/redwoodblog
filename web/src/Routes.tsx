@@ -25,13 +25,13 @@ const Routes = () => {
       <Route path="/signup" page={SignupPage} name="signup" />
       <Route path="/forgot-password" page={ForgotPasswordPage} name="forgotPassword" />
       <Route path="/reset-password" page={ResetPasswordPage} name="resetPassword" />
-      <PrivateSet unauthenticated="home" roles="admin">
+      <PrivateSet unauthenticated="home" roles={['admin', 'user']}>
         <Set wrap={ScaffoldLayout} title="Posts" titleTo="posts" buttonLabel="New Post" buttonTo="newPost">
-          <Route path="/admin/posts/new" page={PostNewPostPage} name="newPost" />
+          <Route path="/posts/new" page={PostNewPostPage} name="newPost" />
           <Route path="/generate-post" page={GeneratePostPage} name="generatePost" />
-          <Route path="/admin/posts/{id:Int}/edit" page={PostEditPostPage} name="editPost" />
-          <Route path="/admin/posts/{id:Int}" page={PostPostPage} name="post" />
-          <Route path="/admin/posts" page={PostPostsPage} name="posts" />
+          <Route path="/posts/{id:Int}/edit" page={PostEditPostPage} name="editPost" />
+          <Route path="/posts/{id:Int}" page={PostPostPage} name="post" />
+          <Route path="/posts" page={PostPostsPage} name="posts" />
         </Set>
       </PrivateSet>
       <Set wrap={BlogLayout} title="Blogs">

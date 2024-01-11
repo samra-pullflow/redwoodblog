@@ -34,10 +34,11 @@ export const NewPost = () => {
   }
 
   return (
-    <Box>
-      <Box>
-        <Heading as="h2">New Post</Heading>
-      </Box>
+    <Box p="4">
+      <Heading alignItems="center" size="md" fontFamily="sans-serif">
+        Create New Post
+      </Heading>
+
       <Box>
         <PostForm onSave={onSave} loading={loading} error={error} />
       </Box>

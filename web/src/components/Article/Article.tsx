@@ -21,16 +21,16 @@ const Article = ({ article, doTruncate }) => {
       <Card>
         <CardBody>
           <Stack divider={<StackDivider />}>
-            <Heading size="md">
+            <Heading size="md" fontFamily="serif">
               <Link to={routes.article({ id: article.id })}>
                 Title: {article.title}
               </Link>
               <Text>by {article.user.email}</Text>
             </Heading>
-            <Text>
+            <Text fontFamily="serif">
               Description: {doTruncate ? truncate(article.body) : article.body}
             </Text>
-            <Text>Created At: {formattedDate}</Text>
+            <Text fontFamily="serif">Created At: {formattedDate}</Text>
           </Stack>
         </CardBody>
       </Card>

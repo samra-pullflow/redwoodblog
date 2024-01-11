@@ -22,7 +22,7 @@ export const QUERY = gql`
 
 export const Loading = () => <Box>Loading...</Box>
 
-export const Empty = () => <Box>Empty</Box>
+export const Empty = () => <Box>No Articles!</Box>
 
 export const Failure = ({ error }: CellFailureProps) => (
   console.log('cant fetch data'),
