@@ -1,7 +1,7 @@
 import OpenAI from 'openai'
 
-import { Post } from 'src/lib/post_manager'
 const openai = new OpenAI()
+import { Post } from 'src/lib/post_manager'
 
 export const createService = async ({
   input,
@@ -35,14 +35,13 @@ export const getUserService = async ({ id }) => {
 export const generatePost = async ({ topic }) => {
   const completion = await openai.chat.completions.create({
     messages: [
-      // {
-      //   role: 'system',
-      //   content:
-      //     'useLLM is a React library that lets you integrate large language models like OpenAIs ChatGPT and add AI-powered features into your React app with just a few lines of code. It supports message streaming, prompt engineering, audio transcription, text-to-speech,and much more right out of the box, offers powerful abstractions for building complex AI apps. You can read the docs and try out live demos',
-      // },
+      {
+        role: 'system',
+        content: 'Generates a blog post of 10 lines',
+      },
       {
         role: 'user',
-        content: `Youre a blog posts writer bot. Given a topic, generate a blog post on topic: ${topic}`,
+        content: `You are a blog posts writer bot. Given a topic, generate a blog post on topic: ${topic}`,
       },
       {
         role: 'user',

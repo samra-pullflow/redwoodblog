@@ -38,6 +38,7 @@ describe('Posts', () => {
 export {}
 const subject = () => {
   jest.mock('src/lib/post_manager', () => mockManager)
+
   return require('./posts')
 }
 

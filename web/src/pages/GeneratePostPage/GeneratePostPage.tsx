@@ -36,8 +36,6 @@ const GeneratePostPage = () => {
   const handleGenerateText = async () => {
     try {
       await fetchData({ variables: { topic: inputText } })
-      console.log('Data ', data.generatePost)
-      if (data.generatePost) setGeneratedText(data.generatePost)
     } catch (error) {
       console.error('Error generating post:', error)
     }
