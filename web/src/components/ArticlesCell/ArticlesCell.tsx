@@ -12,13 +12,17 @@ export const QUERY = gql`
       title
       body
       createdAt
+      user {
+        name
+        email
+      }
     }
   }
 `
 
 export const Loading = () => <Box>Loading...</Box>
 
-export const Empty = () => <Box>Empty</Box>
+export const Empty = () => <Box>No Articles!</Box>
 
 export const Failure = ({ error }: CellFailureProps) => (
   console.log('cant fetch data'),
@@ -27,6 +31,6 @@ export const Failure = ({ error }: CellFailureProps) => (
 
 export const Success = ({ articles }: CellSuccessProps<ArticlesQuery>) => {
   return articles.map((article) => (
-    <Article key={article.id} article={article}></Article>
+    <Article key={article.id} article={article} doTruncate={true}></Article>
   ))
 }

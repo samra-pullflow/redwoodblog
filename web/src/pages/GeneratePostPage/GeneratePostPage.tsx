@@ -1,10 +1,10 @@
 import { useState } from 'react'
 
-import { Box, Button, Input, Textarea, Spinner } from '@chakra-ui/react'
+import { useLazyQuery } from '@apollo/client'
+import { Box, Button, Input, Textarea } from '@chakra-ui/react'
 import type { CreatePostInput } from 'types/graphql'
 
-import { Link, routes, navigate } from '@redwoodjs/router'
-import { useQuery } from '@redwoodjs/web'
+import { routes, navigate } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
@@ -24,14 +24,18 @@ const CREATE_POST_MUTATION = gql`
 const GeneratePostPage = () => {
   const [inputText, setInputText] = useState('')
   const [generatedText, setGeneratedText] = useState('')
-  const { loading, error, data } = useQuery(QUERY, {
-    variables: { topic: inputText },
+
+  const [fetchData, { loading, data }] = useLazyQuery(QUERY, {
+    onCompleted: (resultData) => {
+      if (resultData.generatePost) {
+        setGeneratedText(resultData.generatePost)
+      }
+    },
   })
 
   const handleGenerateText = async () => {
     try {
-      console.log('Data ', data)
-      if (data && data.generatePost) setGeneratedText(data.generatePost)
+      await fetchData({ variables: { topic: inputText } })
     } catch (error) {
       console.error('Error generating post:', error)
     }
@@ -66,17 +70,15 @@ const GeneratePostPage = () => {
           isLoading={loading}
           loadingText="Generating..."
         >
-          {loading ? <Spinner size="sm" /> : 'Generate Text through AI'}
+          Generate Text through AI
         </Button>
-        {!loading && (
-          <Textarea
-            value={generatedText}
-            onChange={(e) => setGeneratedText(e.target.value)}
-            placeholder="Generated Text"
-            mt={2}
-            rows={10}
-          />
-        )}
+        <Textarea
+          value={generatedText}
+          onChange={(e) => setGeneratedText(e.target.value)}
+          placeholder="Generated Text"
+          mt={2}
+          rows={10}
+        />
         <Button
           onClick={() => onSave({ title: inputText, body: generatedText })}
           colorScheme="purple"
@@ -84,7 +86,7 @@ const GeneratePostPage = () => {
           mt={2}
           loadingText="Generating..."
         >
-          {loading ? <Spinner size="sm" /> : 'Save'}
+          Save
         </Button>
       </Box>
     </>

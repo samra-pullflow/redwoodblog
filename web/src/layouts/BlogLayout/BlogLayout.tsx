@@ -1,4 +1,15 @@
-import { Box, Flex, Heading, Text, Button, Stack } from '@chakra-ui/react'
+import { AddIcon, ExternalLinkIcon, RepeatIcon } from '@chakra-ui/icons'
+import {
+  Box,
+  Flex,
+  Heading,
+  Menu,
+  MenuButton,
+  MenuItem,
+  IconButton,
+  MenuList,
+} from '@chakra-ui/react'
+import { FaRegUserCircle } from 'react-icons/fa'
 
 import { Link, routes } from '@redwoodjs/router'
 
@@ -9,7 +20,7 @@ type BlogLayoutProps = {
 import { useAuth } from 'src/auth'
 
 const BlogLayout = ({ children }: BlogLayoutProps) => {
-  const { isAuthenticated, currentUser, logOut } = useAuth()
+  const { isAuthenticated, logOut } = useAuth()
   return (
     <>
       <Box as="header" p={4} bg="purple.500" color="white">
@@ -18,32 +29,45 @@ const BlogLayout = ({ children }: BlogLayoutProps) => {
             <Heading as="h1" fontSize="xl">
               <Link to={routes.home()}>Redwood Blog</Link>
             </Heading>
-            {isAuthenticated ? (
-              <Flex align="center">
-                <Text fontSize="sm" mr={2}>
-                  Logged in as {currentUser.email}
-                </Text>
-                <Button size="sm" onClick={logOut}>
-                  Logout
-                </Button>
-              </Flex>
-            ) : (
-              <Link to={routes.login()}>Login</Link>
-            )}
           </Box>
-          <Stack direction="row" spacing={4}>
-            <Flex as="ul" listStyleType="none" ml={4} fontSize="sm">
-              <li>
-                <Link to={routes.home()}>Home </Link>
-              </li>
-              <li>
-                <Link to={routes.about()}>About </Link>
-              </li>
-              <li>
-                <Link to={routes.contact()}>Contact </Link>
-              </li>
+          {isAuthenticated ? (
+            <Flex gap={2}>
+              <Menu>
+                <MenuButton
+                  as={IconButton}
+                  aria-label="Options"
+                  icon={<FaRegUserCircle />}
+                  variant="outline"
+                />
+                <MenuList>
+                  <Link to={routes.generatePost()}>
+                    <MenuItem icon={<AddIcon />} color="green">
+                      Generate Post
+                    </MenuItem>
+                  </Link>
+                  <Link to={routes.posts()}>
+                    <MenuItem icon={<ExternalLinkIcon />} color="green">
+                      Posts
+                    </MenuItem>
+                  </Link>
+                  <Link to={routes.newPost()}>
+                    <MenuItem icon={<ExternalLinkIcon />} color="green">
+                      New Post
+                    </MenuItem>
+                  </Link>
+                  <MenuItem
+                    onClick={logOut}
+                    icon={<RepeatIcon />}
+                    color="green"
+                  >
+                    Logout
+                  </MenuItem>
+                </MenuList>
+              </Menu>
             </Flex>
-          </Stack>
+          ) : (
+            <Link to={routes.login()}>Login</Link>
+          )}
         </Flex>
       </Box>
       <main>{children}</main>

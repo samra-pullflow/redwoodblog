@@ -12,6 +12,10 @@ export const QUERY = gql`
       title
       body
       createdAt
+      user {
+        name
+        email
+      }
     }
   }
 `
@@ -23,7 +27,7 @@ export const Empty = () => <Box>Empty</Box>
 export const Failure = ({
   error,
 }: CellFailureProps<FindArticleQueryVariables>) => (
-  <Box color="red">Error: {error?.message}</Box>
+  <div style={{ color: 'red' }}>Error: {error?.message}</div>
 )
 
 export const Success = ({
@@ -31,7 +35,7 @@ export const Success = ({
 }: CellSuccessProps<FindArticleQuery, FindArticleQueryVariables>) => {
   return (
     <>
-      <Article key={article.id} article={article}></Article>
+      <Article article={article} doTruncate={false}></Article>
     </>
   )
 }
